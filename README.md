@@ -99,14 +99,11 @@ Este projeto pode ser expandido com:
 
 ```bash
 MVP_Machine_Learning/
-├── data/
-│   └── WA_Fn-UseC_-Telco-Customer-Churn.csv   # Dataset utilizado
-├── notebooks/
-│   └── mvp_churn_template_v2.ipynb            # Notebook principal com análise e modelagem
-├── results/
-│   └── resultados_modelos.csv                 # Métricas de desempenho dos modelos
-├── README.md                                  # Documentação do projeto
-
+├── WA_Fn-UseC_-Telco-Customer-Churn.csv   # Dataset utilizado
+├── mvp_churn_template_v2.ipynb            # Notebook principal com análise e modelagem
+├── resultados_modelos.csv                 # Métricas de desempenho dos modelos
+├── README.md                              # Documentação do projeto
+```
 ---
 
 ## 👨‍💻 Autor
