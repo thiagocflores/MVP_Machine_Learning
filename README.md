@@ -97,10 +97,15 @@ Este projeto pode ser expandido com:
 
 ## 📂 Estrutura do Repositório
 
+```bash
 MVP_Machine_Learning/
-│── WA_Fn-UseC_-Telco-Customer-Churn.csv # Dataset
-│── mvp_churn_template_v2.ipynb # Notebook no Google Colab
-│── README.md # Este arquivo
+├── data/
+│   └── WA_Fn-UseC_-Telco-Customer-Churn.csv   # Dataset utilizado
+├── notebooks/
+│   └── mvp_churn_template_v2.ipynb            # Notebook principal com análise e modelagem
+├── results/
+│   └── resultados_modelos.csv                 # Métricas de desempenho dos modelos
+├── README.md                                  # Documentação do projeto
 
 ---
 
