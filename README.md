@@ -97,3 +97,15 @@ Este projeto pode ser expandido com:
 
 ## 📂 Estrutura do Repositório
 
+MVP_Machine_Learning/
+│── WA_Fn-UseC_-Telco-Customer-Churn.csv # Dataset
+│── mvp_churn_template_v2.ipynb # Notebook no Google Colab
+│── README.md # Este arquivo
+
+---
+
+## 👨‍💻 Autor
+
+**Thiago Cardozo Flores**  
+Pós-graduação em Ciência de Dados e Analytics - PUC-Rio  
+
