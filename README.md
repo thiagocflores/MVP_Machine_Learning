@@ -2,6 +2,7 @@
 Projeto de conclusão do sprint Machine Learning e Analytics do curso de Pós Graduação em Ciência de Dados e Analytics da PUC-Rio. Este projeto visa prever a evasão de clientes (**churn**) em uma empresa de telecomunicações, utilizando o dataset público **Telco Customer Churn**.
 
 [Link para o notebook no Google Colab](https://colab.research.google.com/drive/1Z3Tf1gCn4uGICX2xcx5czdReTvmtW2Tg?usp=sharing)
+
 ---
 
 ## 📝 Definição do Problema
