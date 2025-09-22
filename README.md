@@ -1,69 +1,104 @@
-# MVP_Machine_Learning - Previsão de Churn em Telecom
-Projeto de conclusão do sprint Machine Learning e Analytics do curso de Pós Graduação em Ciência de Dados e Analytics da PUC-Rio
-
-## 📌 Contexto do Problema
-
-A retenção de clientes é um dos maiores desafios em empresas de telecomunicações. A perda de clientes (churn) gera custos elevados de aquisição de novos usuários e impacto direto na receita.  
-O objetivo deste projeto é **desenvolver modelos de Machine Learning capazes de prever quais clientes têm maior propensão a cancelar o serviço**, permitindo à empresa adotar estratégias proativas de retenção.
+# 📊 MVP_Machine_Learning - Previsão de Churn em Telecom
+Projeto de conclusão do sprint Machine Learning e Analytics do curso de Pós Graduação em Ciência de Dados e Analytics da PUC-Rio. Este projeto visa prever a evasão de clientes (**churn**) em uma empresa de telecomunicações, utilizando o dataset público **Telco Customer Churn**.
 
 ---
 
-## 🎯 Objetivo
+## 📝 Definição do Problema
 
-Construir um MVP de ciência de dados que:  
-- Analise dados de clientes da Telco.  
-- Modele e compare diferentes algoritmos de machine learning.  
-- Identifique as variáveis mais relevantes para prever o churn.  
-- Entregue insights que possam apoiar a tomada de decisão.  
+**Objetivo:**  
+Prever se um cliente de telecomunicações irá cancelar o serviço (**churn**) com base em dados demográficos, contratuais e de uso.
+
+**Descrição do problema:**  
+A evasão de clientes representa uma grande perda financeira para empresas de telecomunicações. Antecipar quais clientes têm maior chance de sair permite desenvolver estratégias de retenção personalizadas.
+
+**Premissas / Hipóteses:**  
+- Clientes com contratos mensais têm maior chance de churn.  
+- A ausência de serviços adicionais (TV, Internet, telefone) pode aumentar o risco de cancelamento.  
+- Diferenças de faixa etária e renda influenciam a probabilidade de churn.  
+
+**Restrição na seleção dos dados:**  
+- Utilização apenas do dataset original sem enriquecimento externo.  
+- Remoção de colunas irrelevantes (ex.: CustomerID).  
+
+**Descrição do dataset:**  
+- **Fonte:** Kaggle – [Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn/)
+- **Tamanho:** 7043 clientes, 21 atributos  
+- **Variável alvo:** `Churn` (Yes / No)  
+- **Atributos principais:**  
+  - Dados demográficos: `gender`, `SeniorCitizen`, `Partner`, `Dependents`  
+  - Serviços contratados: `PhoneService`, `InternetService`, `StreamingTV`, etc.  
+  - Dados contratuais: `Contract`, `PaymentMethod`, `tenure`, `MonthlyCharges`, `TotalCharges`
 
 ---
 
-## 🗂️ Dataset
+## ⚙️ Preparação dos Dados
 
-Utilizamos o dataset público **Telco Customer Churn**, disponível originalmente no Kaggle.  
-
-- **Observações:** 7.043 clientes.  
-- **Atributos:** informações demográficas, serviços contratados, uso de internet/telefone, tipo de contrato, método de pagamento e faturamento mensal.  
-- **Variável alvo:** `Churn` (indica se o cliente cancelou ou não o serviço).  
-
-📎 [Link para o dataset no GitHub](https://github.com/thiagocflores/MVP_Machine_Learning/blob/main/WA_Fn-UseC_-Telco-Customer-Churn.csv)
-
----
-
-## 🛠️ Preparação de Dados
-
-- Remoção de valores ausentes e ajustes de tipos de variáveis.  
-- Transformação de variáveis categóricas em dummies (One-Hot Encoding).  
-- Normalização de variáveis numéricas.  
-- Separação em **treino (80%)** e **teste (20%)**.  
-- Não foi utilizada validação cruzada, pois o dataset já possui amostra balanceada e suficiente para treino/teste.  
+1. Divisão em **treino (80%)** e **teste (20%)**.  
+2. Validação cruzada foi aplicada para otimização de hiperparâmetros.  
+3. Transformações aplicadas:  
+   - Codificação de variáveis categóricas (`LabelEncoder`).  
+   - Padronização de atributos numéricos (`StandardScaler`).  
+4. Feature Selection: variáveis como `customerID` foram removidas por não contribuírem para a previsão.  
 
 ---
 
 ## 🤖 Modelagem e Treinamento
 
-Três algoritmos foram avaliados:
+- **Algoritmos utilizados:**  
+  - Logistic Regression (baseline, interpretável)  
+  - Random Forest (bom para capturar interações e variáveis categóricas)  
+  - XGBoost (modelo avançado e robusto para classificação tabular)  
 
-1. **Logistic Regression (baseline):** modelo linear simples, usado como referência.  
-2. **Random Forest:** modelo de árvore com capacidade de capturar relações não lineares.  
-3. **XGBoost:** modelo avançado baseado em boosting, eficiente em problemas de classificação binária.  
-
-### Ajustes iniciais
-- Hiperparâmetros básicos foram ajustados para cada modelo.  
-- Foi verificado risco de *underfitting* com Logistic Regression.  
-- Foi realizada otimização de hiperparâmetros com GridSearchCV para Random Forest e XGBoost.  
+- **Ajustes iniciais:**  
+  - Hiperparâmetros otimizados com **GridSearchCV** para RF e XGB.  
 
 ---
 
-## 📈 Avaliação de Resultados
+## 📈 Avaliação dos Resultados
 
-As métricas utilizadas foram: **Acurácia, Precisão, Recall, F1-score e AUC-ROC**.
+**Métricas utilizadas:**  
+- **Accuracy** (acurácia geral)  
+- **Precision** (taxa de acertos entre positivos previstos)  
+- **Recall** (capacidade de identificar clientes que realmente cancelaram)  
+- **F1-score** (média harmônica entre Precision e Recall)  
+- **ROC AUC** (área sob a curva ROC, medida geral de desempenho do modelo)  
 
-| Modelo              | Acurácia | Precisão | Recall | F1-score | AUC  |
-|---------------------|----------|----------|--------|----------|------|
-| Logistic Regression | 0.80     | 0.64     | 0.55   | 0.59     | 0.84 |
-| Random Forest       | 0.80     | 0.69     | 0.43   | 0.53     | 0.84 |
-| XGBoost             | 0.81     | 0.67     | 0.53   | 0.59     | 0.84 |
+### 📊 Resultados Reais
+
+#### Logistic Regression
+- **Accuracy:** 0.80  
+- **Precision (churn):** 0.64  
+- **Recall (churn):** 0.55  
+- **F1 (churn):** 0.59  
+- **ROC AUC:** 0.84  
+
+#### Random Forest  
+- **Melhores parâmetros:** `{'max_depth': 5, 'n_estimators': 100}`  
+- **Accuracy:** 0.80  
+- **Precision (churn):** 0.69  
+- **Recall (churn):** 0.43  
+- **F1 (churn):** 0.53  
+- **ROC AUC:** 0.84  
+
+#### XGBoost  
+- **Melhores parâmetros:** `{'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 100}`  
+- **Accuracy:** 0.81  
+- **Precision (churn):** 0.67  
+- **Recall (churn):** 0.53  
+- **F1 (churn):** 0.59  
+- **ROC AUC:** 0.84  
+
+---
+
+### 📊 Comparação Geral
+
+| Modelo                | Accuracy | Precision (churn) | Recall (churn) | F1   | ROC AUC |
+|------------------------|----------|-------------------|----------------|------|---------|
+| Logistic Regression    | 0.80     | 0.64              | 0.55           | 0.59 | 0.84    |
+| Random Forest          | 0.80     | 0.69              | 0.43           | 0.53 | 0.84    |
+| XGBoost                | 0.81     | 0.67              | 0.53           | 0.59 | 0.84    |
+
+👉 Esses resultados são salvos automaticamente em `metrics_results.csv`.
 
 📌 **Melhor solução encontrada:**  
 - Apesar de **Random Forest** apresentar maior **precision**, ele perde em **recall**.  
